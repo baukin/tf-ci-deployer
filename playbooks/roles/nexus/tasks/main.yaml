@@ -32,6 +32,15 @@
     dest: /opt/nexus/nexus.nginx.conf
     mode: 0644
 
+- name: apply traefik configuration
+  template:
+    src: "{{ item }}.j2"
+    dest: "/opt/nexus/{{ item }}"
+    mode: 0644
+  with_items:
+    - nexus.traefik.yml
+    - nexus.traefik.provider.yaml
+
 - name: apply docker-compose.yaml
   template:
     src: docker-compose.yaml.j2
